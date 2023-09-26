@@ -5,10 +5,22 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslintPlugin({ cache: false })],
-  server: {
-    hmr: {
-      overlay: false,
+  plugins: [
+    react(),
+    {
+      // default settings on build (i.e. fail on error)
+      ...eslintPlugin({ cache: false }),
+      apply: 'build',
     },
-  },
+    {
+      // do not fail on serve (i.e. local development)
+      ...eslintPlugin({
+        failOnWarning: false,
+        failOnError: false,
+        cache: false,
+      }),
+      apply: 'serve',
+      enforce: 'post',
+    },
+  ],
 });
