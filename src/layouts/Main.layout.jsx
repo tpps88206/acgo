@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, User } from '@nextui-org/react';
+import { Avatar, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react';
 
 import Logo from '../components/Logo.jsx';
 
@@ -20,11 +20,7 @@ const MainLayout = () => {
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem>
-            <User
-              avatarProps={{
-                src: 'https://i.pravatar.cc/150?u=a04258114e29026702d',
-              }}
-            />
+            <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
           </NavbarItem>
         </NavbarContent>
       </Navbar>

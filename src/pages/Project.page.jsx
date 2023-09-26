@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import EventList from '../components/EventList.jsx';
 import { getProjects } from '../services/firebase/project.js';
 
 const ProjectPage = () => {
+  const [events, setEvents] = useState([]);
   const { projectID } = useParams();
 
   useEffect(() => {
-    getProjects(projectID);
+    getProjects(projectID).then(value => setEvents(value.events));
   }, [projectID]);
 
-  return <div>project page</div>;
+  return (
+    <div>
+      <EventList events={events} />
+    </div>
+  );
 };
 
 export default ProjectPage;

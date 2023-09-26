@@ -6,7 +6,7 @@ export const getProjects = projectID =>
   get(child(dbRef, `projects/${projectID}`))
     .then(snapshot => {
       if (snapshot.exists()) {
-        console.log(snapshot.val());
+        return snapshot.val();
       } else {
         console.log('No data available');
       }
