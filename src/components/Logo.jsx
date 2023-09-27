@@ -9,7 +9,7 @@ const Logo = () => (
     viewBox="0 0 32.000000 32.000000"
     preserveAspectRatio="xMidYMid meet"
   >
-    <g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" fill="#5555FF" stroke="none">
+    <g transform="translate(0.000000,32.000000) scale(0.100000,-0.100000)" fill="#5555ff" stroke="none">
       <path
         d="M12 308 c-17 -17 -17 -279 0 -296 17 -17 279 -17 296 0 17 17 17 279
 0 296 -17 17 -279 17 -296 0z m215 -15 c31 -20 53 -69 53 -116 0 -63 -48 -166

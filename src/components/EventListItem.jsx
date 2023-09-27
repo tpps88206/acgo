@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EventListItem = ({ title, cost, date }) => {
+const EventListItem = ({ title, cost, createdAt }) => {
   return (
     <div className="flex flex-row">
       <div className="basis-1/2 flex flex-col">
@@ -9,7 +9,7 @@ const EventListItem = ({ title, cost, date }) => {
       </div>
       <div className="basis-1/2 flex flex-col">
         <div>{cost}</div>
-        <div>{date}</div>
+        <div>{createdAt}</div>
       </div>
     </div>
   );
