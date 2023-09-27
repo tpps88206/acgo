@@ -1,6 +1,6 @@
 import { child, get, getDatabase, push, ref, serverTimestamp, update } from 'firebase/database';
 
-export const addEvent = (projectID, title, cost) => {
+export const addEvent = (projectID, title, cost, paidBy, shareForWhom) => {
   const dbRef = ref(getDatabase());
 
   const newEventKey = push(child(dbRef, `projects/${projectID}/events`)).key;
@@ -9,6 +9,8 @@ export const addEvent = (projectID, title, cost) => {
   updatePayload[`projects/${projectID}/events/${newEventKey}`] = {
     title,
     cost,
+    paidBy,
+    shareForWhom,
     createdAt: serverTimestamp(),
   };
 

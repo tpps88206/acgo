@@ -8,7 +8,7 @@ import MemberList from '../components/MemberList.jsx';
 import { getMembers } from '../services/firebase/member.js';
 
 const MembersPage = () => {
-  const [members, setMembers] = useState(null);
+  const [members, setMembers] = useState([]);
   const { projectID } = useParams();
   const navigate = useNavigate();
 

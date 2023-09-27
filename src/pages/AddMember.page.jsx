@@ -32,8 +32,20 @@ const AddMemberPage = () => {
 
   return (
     <div>
-      <Input className="max-w-xs bg-white" label="姓名" variant="bordered" onChange={handleChangeName} />
-      <Select label="設定權限" className="max-w-xs" onChange={handleChangeRole}>
+      <Input
+        className="max-w-xs bg-white"
+        label="姓名"
+        variant="bordered"
+        labelPlacement="outside"
+        onChange={handleChangeName}
+      />
+      <Select
+        label="設定權限"
+        className="max-w-xs"
+        variant="bordered"
+        labelPlacement="outside"
+        onChange={handleChangeRole}
+      >
         {memberRoleArray.map(memberRole => (
           <SelectItem key={memberRole.value} value={memberRole.value}>
             {memberRole.label}

@@ -6,7 +6,7 @@ import EventList from '../components/EventList.jsx';
 import { getEvents } from '../services/firebase/event.js';
 
 const ProjectPage = () => {
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState({});
   const { projectID } = useParams();
   const navigate = useNavigate();
 

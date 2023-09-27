@@ -1,11 +1,11 @@
 import React from 'react';
 
-const EventListItem = ({ title, cost, createdAt }) => {
+const EventListItem = ({ title, cost, paidBy, createdAt }) => {
   return (
     <div className="flex flex-row">
       <div className="basis-1/2 flex flex-col">
         <div>{title}</div>
-        <div>我付的錢</div>
+        <div>{paidBy} 先付</div>
       </div>
       <div className="basis-1/2 flex flex-col">
         <div>{cost}</div>

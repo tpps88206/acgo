@@ -7,10 +7,15 @@ import EventListItem from './EventListItem.jsx';
 const EventList = ({ events }) => {
   return (
     <div>
-      {events &&
-        map(events, (event, index) => (
-          <EventListItem key={index} title={event?.title} cost={event?.cost} createdAt={event?.createdAt} />
-        ))}
+      {map(events, (event, index) => (
+        <EventListItem
+          key={index}
+          title={event?.title}
+          cost={event?.cost}
+          paidBy={event?.paidBy}
+          createdAt={event?.createdAt}
+        />
+      ))}
     </div>
   );
 };

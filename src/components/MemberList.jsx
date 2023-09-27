@@ -17,19 +17,19 @@ import { DeleteIcon } from '../icons/Delete.icon.jsx';
 import { EditIcon } from '../icons/Edit.icon.jsx';
 
 const MemberList = ({ members }) => {
-  const renderCell = useCallback((user, columnKey) => {
-    const cellValue = user[columnKey];
+  const renderCell = useCallback((member, columnKey) => {
+    const cellValue = member[columnKey];
 
     switch (columnKey) {
       case 'name':
         return (
-          <User avatarProps={{ radius: 'lg', src: user?.avatar }} name={cellValue}>
-            {user?.email}
+          <User avatarProps={{ radius: 'lg', src: member?.avatar }} name={cellValue}>
+            {member?.email}
           </User>
         );
       case 'role':
         return (
-          <Chip className="capitalize" color={memberRoleColorMap[user?.role]} size="sm" variant="flat">
+          <Chip className="capitalize" color={memberRoleColorMap[member?.role]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
