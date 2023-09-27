@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import AddEventButton from '../components/AddEventButton.jsx';
+import AddButton from '../components/AddButton.jsx';
 import EventList from '../components/EventList.jsx';
 import { getEvents } from '../services/firebase/event.js';
 
@@ -15,14 +15,14 @@ const ProjectPage = () => {
     getEvents(projectID).then(value => setEvents(value));
   }, [projectID]);
 
-  const handleClickAddEventButton = () => {
+  const handleClickAddButton = () => {
     navigate('add');
   };
 
   return (
     <div>
-      <EventList events={events} />
-      <AddEventButton onClick={handleClickAddEventButton} />
+      {events && <EventList events={events} />}
+      <AddButton onClick={handleClickAddButton} />
     </div>
   );
 };

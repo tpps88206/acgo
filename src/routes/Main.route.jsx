@@ -7,6 +7,7 @@ const MainPage = Loadable(lazy(() => import('../pages/Main.page.jsx')));
 const ProjectPage = Loadable(lazy(() => import('../pages/Project.page.jsx')));
 const AddEventPage = Loadable(lazy(() => import('../pages/AddEvent.page.jsx')));
 const MembersPage = Loadable(lazy(() => import('../pages/Members.page.jsx')));
+const AddMemberPage = Loadable(lazy(() => import('../pages/AddMember.page.jsx')));
 
 const MainRouter = {
   path: '/',
@@ -27,6 +28,10 @@ const MainRouter = {
     {
       path: '/p/:projectID/members',
       element: <MembersPage />,
+    },
+    {
+      path: '/p/:projectID/members/add',
+      element: <AddMemberPage />,
     },
   ],
 };

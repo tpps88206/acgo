@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/react';
 
 import AddIcon from '../icons/Add.icon.jsx';
 
-const AddEventButton = props => {
+const AddButton = props => {
   return (
     <div className="flex gap-4 items-center">
       <Button isIconOnly color="primary" variant="shadow" {...props}>
@@ -14,4 +14,4 @@ const AddEventButton = props => {
   );
 };
 
-export default AddEventButton;
+export default AddButton;
