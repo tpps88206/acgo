@@ -65,9 +65,7 @@ const MemberList = ({ members }) => {
         </TableHeader>
         <TableBody items={members}>
           {member => (
-            <TableRow key={member?.memberID}>
-              {columnKey => <TableCell>{renderCell(member, columnKey)}</TableCell>}
-            </TableRow>
+            <TableRow key={member?.id}>{columnKey => <TableCell>{renderCell(member, columnKey)}</TableCell>}</TableRow>
           )}
         </TableBody>
       </Table>

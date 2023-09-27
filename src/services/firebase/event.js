@@ -1,4 +1,5 @@
 import { child, get, getDatabase, push, ref, serverTimestamp, update } from 'firebase/database';
+import map from 'lodash/map';
 
 export const addEvent = (projectID, title, cost, paidBy, shareForWhom) => {
   const dbRef = ref(getDatabase());
@@ -24,7 +25,17 @@ export const getEvents = projectID => {
     .then(snapshot => {
       if (snapshot.exists()) {
         return snapshot.val();
+      } else {
+        return {};
       }
+    })
+    .then(value => {
+      return map(value, (v, index) => {
+        return {
+          ...v,
+          id: index,
+        };
+      });
     })
     .catch(error => {
       console.error(error);

@@ -7,9 +7,9 @@ import EventListItem from './EventListItem.jsx';
 const EventList = ({ events }) => {
   return (
     <div>
-      {map(events, (event, index) => (
+      {map(events, event => (
         <EventListItem
-          key={index}
+          key={event?.id}
           title={event?.title}
           cost={event?.cost}
           paidBy={event?.paidBy}

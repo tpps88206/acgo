@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import map from 'lodash/map.js';
-
 import { Avatar, Button, Chip, Input, Select, SelectItem } from '@nextui-org/react';
 
 import { addEvent } from '../services/firebase/event.js';
@@ -19,14 +17,8 @@ const AddEventPage = () => {
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
-    getMembers(projectID).then(value => {
-      const memberListFromStore = map(value, (v, index) => {
-        return {
-          ...v,
-          id: index,
-        };
-      });
-      setMembers(memberListFromStore);
+    getMembers(projectID).then(data => {
+      setMembers(data);
     });
   }, [projectID]);
 
@@ -39,7 +31,7 @@ const AddEventPage = () => {
   };
 
   const handleClickAdd = () => {
-    addEvent(projectID, title, cost, paidBy, shareForWhom)
+    addEvent(projectID, title, cost * -1, paidBy, shareForWhom)
       .then(() => {
         navigate(`../p/${projectID}`);
       })

@@ -6,13 +6,13 @@ import EventList from '../components/EventList.jsx';
 import { getEvents } from '../services/firebase/event.js';
 
 const ProjectPage = () => {
-  const [events, setEvents] = useState({});
+  const [events, setEvents] = useState([]);
   const { projectID } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
-    getEvents(projectID).then(value => setEvents(value));
+    getEvents(projectID).then(data => setEvents(data));
   }, [projectID]);
 
   const handleClickAddButton = () => {

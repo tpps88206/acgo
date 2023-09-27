@@ -4,11 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react';
 
 import Logo from '../components/Logo.jsx';
+import BalanceButton from './BalanceButton.jsx';
 import MembersButton from './MembersButton.jsx';
 
 const Header = () => {
   const navigate = useNavigate();
 
+  const handleClickBalanceButton = () => {
+    navigate('balance', { relative: 'path' });
+  };
   const handleClickMembersButton = () => {
     navigate('members', { relative: 'path' });
   };
@@ -26,6 +30,9 @@ const Header = () => {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
+          <NavbarItem>
+            <BalanceButton onClick={handleClickBalanceButton} />
+          </NavbarItem>
           <NavbarItem>
             <MembersButton onClick={handleClickMembersButton} />
           </NavbarItem>
