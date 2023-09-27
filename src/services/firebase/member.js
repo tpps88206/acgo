@@ -1,9 +1,9 @@
 import { child, get, getDatabase, ref } from 'firebase/database';
 
-export const getProjects = projectID => {
+export const getMembers = projectID => {
   const dbRef = ref(getDatabase());
 
-  return get(child(dbRef, `projects/${projectID}`))
+  return get(child(dbRef, `projects/${projectID}/members`))
     .then(snapshot => {
       if (snapshot.exists()) {
         return snapshot.val();

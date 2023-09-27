@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import AddEventButton from '../components/AddEventButton.jsx';
 import EventList from '../components/EventList.jsx';
-import { getProjects } from '../services/firebase/project.js';
+import { getEvents } from '../services/firebase/event.js';
 
 const ProjectPage = () => {
   const [events, setEvents] = useState(null);
@@ -12,7 +12,7 @@ const ProjectPage = () => {
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
-    getProjects(projectID).then(value => setEvents(value.events));
+    getEvents(projectID).then(value => setEvents(value));
   }, [projectID]);
 
   const handleClickAddEventButton = () => {
