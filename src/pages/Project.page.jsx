@@ -12,7 +12,9 @@ const ProjectPage = () => {
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
-    getEvents(projectID).then(data => setEvents(data));
+    getEvents(projectID).then(data => {
+      setEvents(data);
+    });
   }, [projectID]);
 
   const handleClickAddButton = () => {
