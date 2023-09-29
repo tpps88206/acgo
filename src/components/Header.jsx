@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react';
 
@@ -9,14 +9,13 @@ import MembersButton from './MembersButton.jsx';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { projectID } = useParams();
 
-  // TODO: 從專案內的其他頁面點擊 header 按鈕網址會錯
   const handleClickBalanceButton = () => {
-    navigate('balance', { relative: 'path' });
+    navigate(`/p/${projectID}/balance`);
   };
-  // TODO: 從專案內的其他頁面點擊 header 按鈕網址會錯
   const handleClickMembersButton = () => {
-    navigate('members', { relative: 'path' });
+    navigate(`/p/${projectID}/members`);
   };
 
   return (
@@ -32,12 +31,16 @@ const Header = () => {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem>
-            <BalanceButton onClick={handleClickBalanceButton} />
-          </NavbarItem>
-          <NavbarItem>
-            <MembersButton onClick={handleClickMembersButton} />
-          </NavbarItem>
+          {projectID && (
+            <>
+              <NavbarItem>
+                <BalanceButton onClick={handleClickBalanceButton} />
+              </NavbarItem>
+              <NavbarItem>
+                <MembersButton onClick={handleClickMembersButton} />
+              </NavbarItem>
+            </>
+          )}
           <NavbarItem>
             <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
           </NavbarItem>
