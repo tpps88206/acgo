@@ -33,6 +33,7 @@ export const getEvents = projectID => {
       return map(value, (v, index) => {
         return {
           ...v,
+          cost: Number(v.cost),
           id: index,
         };
       });

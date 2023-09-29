@@ -29,7 +29,7 @@ export const getBalanceResult = (events, members) => {
         result = result.map(memberFromResult => {
           let needToPayResult = memberFromResult.needToPay;
 
-          const shareForThisMember = event.shareForWhom.filter(
+          const shareForThisMember = event.shareForWhom.find(
             eachShare =>
               isString(eachShare.memberID) &&
               isString(memberFromResult.memberID) &&
@@ -50,9 +50,7 @@ export const getBalanceResult = (events, members) => {
             name: memberFromResult.name,
             needToPay:
               // 如果這個人的 ID 有存在在這次的事件中，就要計算
-              shareForThisMember.length > 0
-                ? needToPayResult + (cost / totalScale) * shareForThisMember[0].scale
-                : needToPayResult,
+              shareForThisMember ? needToPayResult + (cost / totalScale) * shareForThisMember.scale : needToPayResult,
           };
         });
       });
