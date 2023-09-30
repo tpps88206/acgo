@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, Button, Chip, Input, Select, SelectItem } from '@nextui-org/react';
 
+import AdjustMemberScale from '../components/AdjustMemberScale.jsx';
 import { addEvent } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
+import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js';
 
 const AddEventPage = () => {
   const { projectID } = useParams();
@@ -14,6 +16,7 @@ const AddEventPage = () => {
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
   const [shareForWhom, setShareForWhom] = useState([]);
+  const [isAdjustMemberScale, setIsAdjustMemberScale] = useState(false);
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
@@ -47,7 +50,7 @@ const AddEventPage = () => {
   const handleChangeShareForWhom = event => {
     const shareForWhomList = event.target.value?.split(',').map(v => {
       return {
-        memberID: v,
+        id: v,
         scale: 1,
       };
     });
@@ -56,10 +59,18 @@ const AddEventPage = () => {
   };
 
   const handleClickMemberScale = () => {
-    navigate('adjustMemberScale');
+    setIsAdjustMemberScale(true);
   };
 
-  return (
+  return isAdjustMemberScale ? (
+    <AdjustMemberScale
+      cost={cost}
+      shareForWhom={shareForWhom}
+      setShareForWhom={setShareForWhom}
+      members={members}
+      setIsAdjustMemberScale={setIsAdjustMemberScale}
+    />
+  ) : (
     <div>
       <Input
         className="max-w-xs bg-white"
@@ -126,6 +137,7 @@ const AddEventPage = () => {
           );
         }}
         onChange={handleChangeShareForWhom}
+        selectedKeys={flatMemberListToArrayWithIDAndHideScaleZero(shareForWhom)}
       >
         {member => (
           <SelectItem key={member?.id} textValue={member?.name}>

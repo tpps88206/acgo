@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from 
 
 import MemberSelectItem from './MemberSelectItem.jsx';
 
-const MemberList = ({ members, tableColumns }) => {
+const MemberList = ({ members, tableColumns, setValue }) => {
   return (
     <div>
       <Table>
@@ -20,7 +20,7 @@ const MemberList = ({ members, tableColumns }) => {
             <TableRow key={member?.id}>
               {columnKey => (
                 <TableCell>
-                  <MemberSelectItem member={member} columnKey={columnKey} />
+                  <MemberSelectItem member={member} columnKey={columnKey} setValue={e => setValue(e, member?.id)} />
                 </TableCell>
               )}
             </TableRow>

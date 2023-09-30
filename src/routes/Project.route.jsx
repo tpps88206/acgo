@@ -8,7 +8,6 @@ const AddEventPage = Loadable(lazy(() => import('../pages/AddEvent.page.jsx')));
 const MembersPage = Loadable(lazy(() => import('../pages/Members.page.jsx')));
 const AddMemberPage = Loadable(lazy(() => import('../pages/AddMember.page.jsx')));
 const BalancePage = Loadable(lazy(() => import('../pages/Balance.page.jsx')));
-const AdjustMemberScalePage = Loadable(lazy(() => import('../pages/AdjustMemberScale.page.jsx')));
 
 const ProjectRouter = {
   path: '/p',
@@ -33,10 +32,6 @@ const ProjectRouter = {
     {
       path: '/p/:projectID/balance',
       element: <BalancePage />,
-    },
-    {
-      path: '/p/:projectID/add/adjustMemberScale',
-      element: <AdjustMemberScalePage />,
     },
   ],
 };

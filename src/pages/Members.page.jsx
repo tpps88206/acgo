@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import AddButton from '../components/AddButton.jsx';
 import MemberList from '../components/MemberList.jsx';
-import { tableHeaderColumns } from '../constants/members.js';
+import { projectMemberListColumns } from '../constants/members.js';
 import { getMembers } from '../services/firebase/member.js';
 
 const MembersPage = () => {
@@ -24,7 +24,7 @@ const MembersPage = () => {
 
   return (
     <div>
-      {members && <MemberList members={members} tableColumns={tableHeaderColumns} />}
+      {members && <MemberList members={members} tableColumns={projectMemberListColumns} />}
       <AddButton onClick={handleClickAddButton} />
     </div>
   );
