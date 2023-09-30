@@ -34,10 +34,10 @@ const Header = () => {
           {projectID && (
             <>
               <NavbarItem>
-                <BalanceButton onClick={handleClickBalanceButton} />
+                <BalanceButton aria-label="balance button" onClick={handleClickBalanceButton} />
               </NavbarItem>
               <NavbarItem>
-                <MembersButton onClick={handleClickMembersButton} />
+                <MembersButton aria-label="members button" onClick={handleClickMembersButton} />
               </NavbarItem>
             </>
           )}

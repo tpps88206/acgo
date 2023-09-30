@@ -62,10 +62,10 @@ const AdjustMemberScale = ({ shareForWhom, setShareForWhom, members, setIsAdjust
       {tempShareForWhom && (
         <MemberList members={tempShareForWhom} tableColumns={eventMemberListColumns} setValue={handleChangeScale} />
       )}
-      <Button color="primary" onClick={handleClickCancelButton}>
+      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancelButton}>
         取消
       </Button>
-      <Button color="primary" onClick={handleClickSaveButton}>
+      <Button aria-label="save" color="primary" variant="bordered" onClick={handleClickSaveButton}>
         完成
       </Button>
     </div>

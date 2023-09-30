@@ -13,13 +13,19 @@ const MemberSelectItem = ({ member, columnKey, setValue }) => {
     switch (columnKey) {
       case 'name':
         return (
-          <User avatarProps={{ radius: 'lg', src: member?.avatar }} name={cellValue}>
+          <User aria-label="name" avatarProps={{ radius: 'lg', src: member?.avatar }} name={cellValue}>
             {member?.email}
           </User>
         );
       case 'role':
         return (
-          <Chip className="capitalize" color={memberRoleColorMap[member?.role]} size="sm" variant="flat">
+          <Chip
+            aria-label="role"
+            className="capitalize"
+            color={memberRoleColorMap[member?.role]}
+            size="sm"
+            variant="flat"
+          >
             {cellValue}
           </Chip>
         );
@@ -41,6 +47,7 @@ const MemberSelectItem = ({ member, columnKey, setValue }) => {
       case 'scale':
         return (
           <Input
+            aria-label="scale input"
             type="number"
             label="份數"
             variant="bordered"

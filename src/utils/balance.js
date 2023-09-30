@@ -31,9 +31,9 @@ export const getBalanceResult = (events, members) => {
 
           const shareForThisMember = event.shareForWhom.find(
             eachShare =>
-              isString(eachShare.memberID) &&
+              isString(eachShare.id) &&
               isString(memberFromResult.memberID) &&
-              eachShare.memberID === memberFromResult.memberID,
+              eachShare.id === memberFromResult.memberID,
           );
 
           // 付錢或收錢的人要把錢加給他

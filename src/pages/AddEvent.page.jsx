@@ -36,7 +36,9 @@ const AddEventPage = () => {
   const handleClickAdd = () => {
     addEvent(projectID, title, cost * -1, paidBy, shareForWhom)
       .then(() => {
-        navigate(`../p/${projectID}`);
+        navigate(`/p/${projectID}`, {
+          relative: 'path',
+        });
       })
       .catch(error => {
         console.error(error);
@@ -62,6 +64,12 @@ const AddEventPage = () => {
     setIsAdjustMemberScale(true);
   };
 
+  const handleClickCancel = () => {
+    navigate(`/p/${projectID}`, {
+      relative: 'path',
+    });
+  };
+
   return isAdjustMemberScale ? (
     <AdjustMemberScale
       cost={cost}
@@ -74,18 +82,22 @@ const AddEventPage = () => {
     <div>
       <Input
         className="max-w-xs bg-white"
+        aria-label="title input"
         label="品項"
         variant="bordered"
         labelPlacement="outside"
         onChange={handleChangeTitle}
+        value={title}
       />
       <Input
         className="max-w-xs bg-white"
+        aria-label="cost input"
         type="number"
         label="金額"
         variant="bordered"
         labelPlacement="outside"
         onChange={handleChangeCost}
+        value={cost}
       />
       <Select
         items={members}
@@ -104,6 +116,7 @@ const AddEventPage = () => {
           ));
         }}
         onChange={handleChangePaidBy}
+        selectedKeys={paidBy ?? [paidBy]}
       >
         {member => (
           <SelectItem key={member?.id} textValue={member?.name}>
@@ -150,10 +163,13 @@ const AddEventPage = () => {
           </SelectItem>
         )}
       </Select>
-      <Button color="primary" onClick={handleClickMemberScale}>
+      <Button aria-label="adjust scale" color="primary" variant="bordered" onClick={handleClickMemberScale}>
         調整比例
       </Button>
-      <Button color="primary" onClick={handleClickAdd}>
+      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancel}>
+        取消
+      </Button>
+      <Button aria-label="new" color="primary" variant="bordered" onClick={handleClickAdd}>
         新增
       </Button>
     </div>

@@ -23,17 +23,26 @@ const AddMemberPage = () => {
   const handleClickAdd = () => {
     addMember(projectID, name, role)
       .then(() => {
-        navigate(`../p/${projectID}/members`);
+        navigate(`/p/${projectID}/members`, {
+          relative: 'path',
+        });
       })
       .catch(error => {
         console.error(error);
       });
   };
 
+  const handleClickCancel = () => {
+    navigate(`/p/${projectID}/members`, {
+      relative: 'path',
+    });
+  };
+
   return (
     <div>
       <Input
         className="max-w-xs bg-white"
+        aria-label="name input"
         label="姓名"
         variant="bordered"
         labelPlacement="outside"
@@ -41,6 +50,7 @@ const AddMemberPage = () => {
       />
       <Select
         label="設定權限"
+        aria-label="role input"
         className="max-w-xs"
         variant="bordered"
         labelPlacement="outside"
@@ -52,7 +62,10 @@ const AddMemberPage = () => {
           </SelectItem>
         ))}
       </Select>
-      <Button color="primary" onClick={handleClickAdd}>
+      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancel}>
+        取消
+      </Button>
+      <Button aria-label="new" color="primary" variant="bordered" onClick={handleClickAdd}>
         新增
       </Button>
     </div>
