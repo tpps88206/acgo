@@ -4,11 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, Button, Chip, Input, Select, SelectItem } from '@nextui-org/react';
 
 import AdjustMemberScale from '../components/AdjustMemberScale.jsx';
+import EventTabs from '../components/EventTabs.jsx';
 import { addEvent } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
 import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js';
 
-const AddEventPage = () => {
+const AddEventPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -34,7 +35,7 @@ const AddEventPage = () => {
   };
 
   const handleClickAdd = () => {
-    addEvent(projectID, title, cost * -1, paidBy, shareForWhom)
+    addEvent(projectID, title, mode !== 'expense' ? cost : cost * -1, paidBy, shareForWhom)
       .then(() => {
         navigate(`/p/${projectID}`, {
           relative: 'path',
@@ -80,6 +81,7 @@ const AddEventPage = () => {
     />
   ) : (
     <div>
+      <EventTabs mode={mode} />
       <Input
         className="max-w-xs bg-white"
         aria-label="title input"
@@ -101,7 +103,7 @@ const AddEventPage = () => {
       />
       <Select
         items={members}
-        label="誰付錢"
+        label={mode !== 'expense' ? '誰付錢' : '誰收錢'}
         className="max-w-xs"
         variant="bordered"
         labelPlacement="outside"

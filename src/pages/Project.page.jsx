@@ -23,7 +23,7 @@ const ProjectPage = () => {
   }, [projectID]);
 
   const handleClickAddButton = () => {
-    navigate('add');
+    navigate('addExpense');
   };
 
   return (

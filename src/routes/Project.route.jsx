@@ -18,8 +18,12 @@ const ProjectRouter = {
       element: <ProjectPage />,
     },
     {
-      path: '/p/:projectID/add',
-      element: <AddEventPage />,
+      path: '/p/:projectID/addExpense',
+      element: <AddEventPage mode="expense" />,
+    },
+    {
+      path: '/p/:projectID/addIncome',
+      element: <AddEventPage mode="income" />,
     },
     {
       path: '/p/:projectID/members',
