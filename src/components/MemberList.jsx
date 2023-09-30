@@ -2,14 +2,13 @@ import React from 'react';
 
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/react';
 
-import { tableHeaderColumns } from '../constants/members.js';
 import MemberSelectItem from './MemberSelectItem.jsx';
 
-const MemberList = ({ members }) => {
+const MemberList = ({ members, tableColumns }) => {
   return (
     <div>
       <Table>
-        <TableHeader columns={tableHeaderColumns}>
+        <TableHeader columns={tableColumns}>
           {column => (
             <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>
               {column.name}

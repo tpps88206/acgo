@@ -55,6 +55,10 @@ const AddEventPage = () => {
     setShareForWhom(shareForWhomList);
   };
 
+  const handleClickMemberScale = () => {
+    navigate('adjustMemberScale');
+  };
+
   return (
     <div>
       <Input
@@ -134,6 +138,9 @@ const AddEventPage = () => {
           </SelectItem>
         )}
       </Select>
+      <Button color="primary" onClick={handleClickMemberScale}>
+        調整比例
+      </Button>
       <Button color="primary" onClick={handleClickAdd}>
         新增
       </Button>

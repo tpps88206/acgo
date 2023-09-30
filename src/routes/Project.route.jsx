@@ -3,21 +3,17 @@ import React, { lazy } from 'react';
 import Loadable from '../components/Loadable.jsx';
 import MainLayout from '../layouts/Main.layout.jsx';
 
-const MainPage = Loadable(lazy(() => import('../pages/Main.page.jsx')));
 const ProjectPage = Loadable(lazy(() => import('../pages/Project.page.jsx')));
 const AddEventPage = Loadable(lazy(() => import('../pages/AddEvent.page.jsx')));
 const MembersPage = Loadable(lazy(() => import('../pages/Members.page.jsx')));
 const AddMemberPage = Loadable(lazy(() => import('../pages/AddMember.page.jsx')));
 const BalancePage = Loadable(lazy(() => import('../pages/Balance.page.jsx')));
+const AdjustMemberScalePage = Loadable(lazy(() => import('../pages/AdjustMemberScale.page.jsx')));
 
-const MainRouter = {
-  path: '/',
+const ProjectRouter = {
+  path: '/p',
   element: <MainLayout />,
   children: [
-    {
-      path: '/',
-      element: <MainPage />,
-    },
     {
       path: '/p/:projectID',
       element: <ProjectPage />,
@@ -38,7 +34,11 @@ const MainRouter = {
       path: '/p/:projectID/balance',
       element: <BalancePage />,
     },
+    {
+      path: '/p/:projectID/add/adjustMemberScale',
+      element: <AdjustMemberScalePage />,
+    },
   ],
 };
 
-export default MainRouter;
+export default ProjectRouter;

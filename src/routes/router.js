@@ -1,8 +1,8 @@
 import { useRoutes } from 'react-router-dom';
 
-import MainRoutes from './Main.route.jsx';
-import NotFoundRoutes from './NotFound.route.jsx';
+import NotFoundRouter from './NotFound.route.jsx';
+import ProjectRouter from './Project.route.jsx';
 
 export default function Router() {
-  return useRoutes([MainRoutes, NotFoundRoutes]);
+  return useRoutes([ProjectRouter, NotFoundRouter]);
 }
