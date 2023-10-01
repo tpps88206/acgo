@@ -1,7 +1,7 @@
 import { child, get, getDatabase, push, ref, serverTimestamp, update } from 'firebase/database';
 import map from 'lodash/map';
 
-export const addEvent = (projectID, title, cost, paidBy, shareForWhom) => {
+export const addEvent = (projectID, title, cost, paidBy, shareForWhom, mode) => {
   const dbRef = ref(getDatabase());
 
   const newEventKey = push(child(dbRef, `projects/${projectID}/events`)).key;
@@ -12,7 +12,9 @@ export const addEvent = (projectID, title, cost, paidBy, shareForWhom) => {
     cost,
     paidBy,
     shareForWhom,
+    mode,
     createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
   };
 
   return update(dbRef, updatePayload);

@@ -8,6 +8,7 @@ const AddEventPage = Loadable(lazy(() => import('../pages/AddEvent.page.jsx')));
 const MembersPage = Loadable(lazy(() => import('../pages/Members.page.jsx')));
 const AddMemberPage = Loadable(lazy(() => import('../pages/AddMember.page.jsx')));
 const BalancePage = Loadable(lazy(() => import('../pages/Balance.page.jsx')));
+const AddTransferPage = Loadable(lazy(() => import('../pages/AddTransfer.page.jsx')));
 
 const ProjectRouter = {
   path: '/p',
@@ -24,6 +25,10 @@ const ProjectRouter = {
     {
       path: '/p/:projectID/addIncome',
       element: <AddEventPage mode="income" />,
+    },
+    {
+      path: '/p/:projectID/addTransfer',
+      element: <AddTransferPage mode="transfer" />,
     },
     {
       path: '/p/:projectID/members',
