@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { Card, CardBody } from '@nextui-org/react';
+
 import AddButton from '../components/AddButton.jsx';
 import EventList from '../components/EventList.jsx';
 import { getEvents } from '../services/firebase/event.js';
@@ -28,8 +30,14 @@ const ProjectPage = () => {
 
   return (
     <div>
-      {events && <EventList events={events} members={members} />}
-      <AddButton onClick={handleClickAddButton} />
+      {events && (
+        <Card className="container mx-auto px-4">
+          <CardBody>
+            <EventList events={events} members={members} />
+          </CardBody>
+        </Card>
+      )}
+      <AddButton className="absolute right-4 bottom-4" onClick={handleClickAddButton} />
     </div>
   );
 };

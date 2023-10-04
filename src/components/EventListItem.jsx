@@ -1,15 +1,22 @@
 import React from 'react';
 
+import { Chip } from '@nextui-org/react';
+
 const EventListItem = ({ title, cost, paidBy, createdAt }) => {
   return (
     <div className="flex flex-row">
       <div className="basis-1/2 flex flex-col">
-        <div>{title}</div>
-        {cost >= 0 ? <div>{paidBy} 先收</div> : <div>{paidBy} 先付</div>}
+        <p className="text-xl mb-4">{title}</p>
+        <p>
+          {paidBy}{' '}
+          <Chip color={cost >= 0 ? 'success' : 'danger'} variant="bordered">
+            {cost >= 0 ? '先收' : '先付'}
+          </Chip>
+        </p>
       </div>
       <div className="basis-1/2 flex flex-col">
-        {cost >= 0 ? <div>{cost}</div> : <div>{cost * -1}</div>}
-        <div>{createdAt}</div>
+        <p className="text-xl mb-4">{cost >= 0 ? cost : cost * -1}</p>
+        <p>{createdAt}</p>
       </div>
     </div>
   );
