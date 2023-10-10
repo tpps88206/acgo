@@ -46,15 +46,7 @@ const MemberSelectItem = ({ member, columnKey, setValue }) => {
         );
       case 'scale':
         return (
-          <Input
-            aria-label="scale input"
-            type="number"
-            label="份數"
-            variant="bordered"
-            labelPlacement="outside"
-            value={cellValue}
-            onChange={setValue}
-          />
+          <Input aria-label="scale input" type="number" variant="bordered" value={cellValue} onChange={setValue} />
         );
       default:
         return cellValue;

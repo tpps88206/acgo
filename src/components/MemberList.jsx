@@ -7,7 +7,7 @@ import MemberSelectItem from './MemberSelectItem.jsx';
 const MemberList = ({ members, tableColumns, setValue }) => {
   return (
     <div>
-      <Table>
+      <Table className="container mx-auto px-4">
         <TableHeader columns={tableColumns}>
           {column => (
             <TableColumn key={column.uid} align={column.uid === 'actions' ? 'center' : 'start'}>

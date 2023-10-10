@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Button, Input, Select, SelectItem } from '@nextui-org/react';
+import { Avatar, Button, Card, CardBody, Input, Select, SelectItem } from '@nextui-org/react';
 
 import EventTabs from '../components/EventTabs.jsx';
 import { addEvent } from '../services/firebase/event.js';
@@ -60,83 +60,101 @@ const AddTransferPage = ({ mode }) => {
 
   return (
     <div>
-      <EventTabs mode={mode} />
-      <Input
-        className="max-w-xs bg-white"
-        aria-label="cost input"
-        type="number"
-        label="金額"
-        variant="bordered"
-        labelPlacement="outside"
-        onChange={handleChangeCost}
-        value={cost}
-      />
-      <Select
-        items={members}
-        label="轉帳從"
-        className="max-w-xs"
-        variant="bordered"
-        labelPlacement="outside"
-        renderValue={items => {
-          return items.map(item => (
-            <div key={item.key} className="flex items-center gap-2">
-              <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
-              <div className="flex flex-col">
-                <span>{item.data.name}</span>
-              </div>
-            </div>
-          ));
-        }}
-        onChange={handleChangePaidBy}
-        selectedKeys={paidBy && new Set([paidBy])}
-      >
-        {member => (
-          <SelectItem key={member?.id} textValue={member?.name}>
-            <div className="flex gap-2 items-center">
-              <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
-              <div className="flex flex-col">
-                <span className="text-small">{member?.name}</span>
-              </div>
-            </div>
-          </SelectItem>
-        )}
-      </Select>
-      <Select
-        items={members}
-        label="轉帳至"
-        className="max-w-xs"
-        variant="bordered"
-        labelPlacement="outside"
-        renderValue={items => {
-          return items.map(item => (
-            <div key={item.key} className="flex items-center gap-2">
-              <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
-              <div className="flex flex-col">
-                <span>{item.data.name}</span>
-              </div>
-            </div>
-          ));
-        }}
-        onChange={handleChangeShareForWhom}
-        selectedKeys={flatMemberListToArrayWithIDAndHideScaleZero(shareForWhom)}
-      >
-        {member => (
-          <SelectItem key={member?.id} textValue={member?.name}>
-            <div className="flex gap-2 items-center">
-              <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
-              <div className="flex flex-col">
-                <span className="text-small">{member?.name}</span>
-              </div>
-            </div>
-          </SelectItem>
-        )}
-      </Select>
-      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancel}>
-        取消
-      </Button>
-      <Button aria-label="new" color="primary" variant="bordered" onClick={handleClickAdd}>
-        新增
-      </Button>
+      <EventTabs className="mb-4" mode={mode} />
+      <Card className="container mx-auto px-4">
+        <CardBody>
+          <Input
+            className="max-w-xs bg-white my-4"
+            aria-label="cost input"
+            type="number"
+            label="金額"
+            variant="bordered"
+            labelPlacement="outside"
+            onChange={handleChangeCost}
+            value={cost}
+          />
+          <Select
+            items={members}
+            label="轉帳從"
+            className="max-w-xs bg-white my-4"
+            variant="bordered"
+            labelPlacement="outside"
+            renderValue={items => {
+              return items.map(item => (
+                <div key={item.key} className="flex items-center gap-2">
+                  <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
+                  <div className="flex flex-col">
+                    <span>{item.data.name}</span>
+                  </div>
+                </div>
+              ));
+            }}
+            onChange={handleChangePaidBy}
+            selectedKeys={paidBy && new Set([paidBy])}
+          >
+            {member => (
+              <SelectItem key={member?.id} textValue={member?.name}>
+                <div className="flex gap-2 items-center">
+                  <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
+                  <div className="flex flex-col">
+                    <span className="text-small">{member?.name}</span>
+                  </div>
+                </div>
+              </SelectItem>
+            )}
+          </Select>
+          <Select
+            items={members}
+            label="轉帳至"
+            className="max-w-xs bg-white my-4"
+            variant="bordered"
+            labelPlacement="outside"
+            renderValue={items => {
+              return items.map(item => (
+                <div key={item.key} className="flex items-center gap-2">
+                  <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
+                  <div className="flex flex-col">
+                    <span>{item.data.name}</span>
+                  </div>
+                </div>
+              ));
+            }}
+            onChange={handleChangeShareForWhom}
+            selectedKeys={flatMemberListToArrayWithIDAndHideScaleZero(shareForWhom)}
+          >
+            {member => (
+              <SelectItem key={member?.id} textValue={member?.name}>
+                <div className="flex gap-2 items-center">
+                  <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
+                  <div className="flex flex-col">
+                    <span className="text-small">{member?.name}</span>
+                  </div>
+                </div>
+              </SelectItem>
+            )}
+          </Select>
+        </CardBody>
+      </Card>
+      <div className="flex flex-row mt-4">
+        <Button
+          className="max-w-[6rem] basis-1/2 sm:ml-4"
+          aria-label="cancel"
+          color="primary"
+          variant="faded"
+          onClick={handleClickCancel}
+        >
+          取消
+        </Button>
+        <Button
+          className="max-w-[6rem] basis-1/2 ml-auto sm:mr-4"
+          aria-label="new"
+          color="primary"
+          variant="bordered"
+          onClick={handleClickAdd}
+        >
+          新增
+        </Button>
+      </div>
     </div>
   );
 };

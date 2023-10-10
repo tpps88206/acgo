@@ -1,9 +1,11 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 import { Button, ButtonGroup } from '@nextui-org/react';
 
-const EventTabs = ({ mode }) => {
+const EventTabs = ({ mode, className }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ const EventTabs = ({ mode }) => {
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className={classNames('flex w-full flex-col', className)}>
       <ButtonGroup>
         <Button variant={mode === 'expense' ? 'bordered' : 'solid'} color="primary" onClick={handleClickExpenseButton}>
           花費

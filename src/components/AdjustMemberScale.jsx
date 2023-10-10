@@ -62,12 +62,26 @@ const AdjustMemberScale = ({ shareForWhom, setShareForWhom, members, setIsAdjust
       {tempShareForWhom && (
         <MemberList members={tempShareForWhom} tableColumns={eventMemberListColumns} setValue={handleChangeScale} />
       )}
-      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancelButton}>
-        取消
-      </Button>
-      <Button aria-label="save" color="primary" variant="bordered" onClick={handleClickSaveButton}>
-        完成
-      </Button>
+      <div className="flex flex-row mt-4">
+        <Button
+          className="max-w-[6rem] basis-1/2 sm:ml-4"
+          aria-label="cancel"
+          color="primary"
+          variant="faded"
+          onClick={handleClickCancelButton}
+        >
+          取消
+        </Button>
+        <Button
+          className="max-w-[6rem] basis-1/2 ml-auto sm:mr-4"
+          aria-label="new"
+          color="primary"
+          variant="bordered"
+          onClick={handleClickSaveButton}
+        >
+          新增
+        </Button>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Button, Chip, Input, Select, SelectItem } from '@nextui-org/react';
+import { Avatar, Button, Card, CardBody, Chip, Input, Select, SelectItem } from '@nextui-org/react';
 
 import AdjustMemberScale from '../components/AdjustMemberScale.jsx';
 import EventTabs from '../components/EventTabs.jsx';
@@ -81,99 +81,120 @@ const AddEventPage = ({ mode }) => {
     />
   ) : (
     <div>
-      <EventTabs mode={mode} />
-      <Input
-        className="max-w-xs bg-white"
-        aria-label="title input"
-        label="品項"
-        variant="bordered"
-        labelPlacement="outside"
-        onChange={handleChangeTitle}
-        value={title}
-      />
-      <Input
-        className="max-w-xs bg-white"
-        aria-label="cost input"
-        type="number"
-        label="金額"
-        variant="bordered"
-        labelPlacement="outside"
-        onChange={handleChangeCost}
-        value={cost}
-      />
-      <Select
-        items={members}
-        label={mode !== 'expense' ? '誰付錢' : '誰收錢'}
-        className="max-w-xs"
-        variant="bordered"
-        labelPlacement="outside"
-        renderValue={items => {
-          return items.map(item => (
-            <div key={item.key} className="flex items-center gap-2">
-              <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
-              <div className="flex flex-col">
-                <span>{item.data.name}</span>
-              </div>
-            </div>
-          ));
-        }}
-        onChange={handleChangePaidBy}
-        selectedKeys={paidBy && new Set([paidBy])}
-      >
-        {member => (
-          <SelectItem key={member?.id} textValue={member?.name}>
-            <div className="flex gap-2 items-center">
-              <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
-              <div className="flex flex-col">
-                <span className="text-small">{member?.name}</span>
-              </div>
-            </div>
-          </SelectItem>
-        )}
-      </Select>
-      <Select
-        items={members}
-        label="分給誰"
-        variant="bordered"
-        isMultiline={true}
-        selectionMode="multiple"
-        labelPlacement="outside"
-        classNames={{
-          base: 'max-w-xs',
-          trigger: 'min-h-unit-12 py-2',
-        }}
-        renderValue={items => {
-          return (
-            <div className="flex flex-wrap gap-2">
-              {items.map(item => (
-                <Chip key={item.key}>{item.data.name}</Chip>
-              ))}
-            </div>
-          );
-        }}
-        onChange={handleChangeShareForWhom}
-        selectedKeys={flatMemberListToArrayWithIDAndHideScaleZero(shareForWhom)}
-      >
-        {member => (
-          <SelectItem key={member?.id} textValue={member?.name}>
-            <div className="flex gap-2 items-center">
-              <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
-              <div className="flex flex-col">
-                <span className="text-small">{member?.name}</span>
-              </div>
-            </div>
-          </SelectItem>
-        )}
-      </Select>
-      <Button aria-label="adjust scale" color="primary" variant="bordered" onClick={handleClickMemberScale}>
-        調整比例
-      </Button>
-      <Button aria-label="cancel" color="primary" variant="faded" onClick={handleClickCancel}>
-        取消
-      </Button>
-      <Button aria-label="new" color="primary" variant="bordered" onClick={handleClickAdd}>
-        新增
-      </Button>
+      <EventTabs className="mb-4" mode={mode} />
+      <Card className="container mx-auto px-4">
+        <CardBody>
+          <Input
+            className="max-w-xs bg-white my-4"
+            aria-label="title input"
+            label="品項"
+            variant="bordered"
+            labelPlacement="outside"
+            onChange={handleChangeTitle}
+            value={title}
+          />
+          <Input
+            className="max-w-xs bg-white my-4"
+            aria-label="cost input"
+            type="number"
+            label="金額"
+            variant="bordered"
+            labelPlacement="outside"
+            onChange={handleChangeCost}
+            value={cost}
+          />
+          <Select
+            items={members}
+            label={mode !== 'expense' ? '誰付錢' : '誰收錢'}
+            className="max-w-xs bg-white my-4"
+            variant="bordered"
+            labelPlacement="outside"
+            renderValue={items => {
+              return items.map(item => (
+                <div key={item.key} className="flex items-center gap-2">
+                  <Avatar alt={item.data.name} className="flex-shrink-0" size="sm" src={item.data.avatar} />
+                  <div className="flex flex-col">
+                    <span>{item.data.name}</span>
+                  </div>
+                </div>
+              ));
+            }}
+            onChange={handleChangePaidBy}
+            selectedKeys={paidBy && new Set([paidBy])}
+          >
+            {member => (
+              <SelectItem key={member?.id} textValue={member?.name}>
+                <div className="flex gap-2 items-center">
+                  <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
+                  <div className="flex flex-col">
+                    <span className="text-small">{member?.name}</span>
+                  </div>
+                </div>
+              </SelectItem>
+            )}
+          </Select>
+          <Select
+            items={members}
+            label="分給誰"
+            variant="bordered"
+            isMultiline={true}
+            selectionMode="multiple"
+            labelPlacement="outside"
+            className="max-w-xs bg-white my-4"
+            renderValue={items => {
+              return (
+                <div className="flex flex-wrap gap-2">
+                  {items.map(item => (
+                    <Chip key={item.key}>{item.data.name}</Chip>
+                  ))}
+                </div>
+              );
+            }}
+            onChange={handleChangeShareForWhom}
+            selectedKeys={flatMemberListToArrayWithIDAndHideScaleZero(shareForWhom)}
+          >
+            {member => (
+              <SelectItem key={member?.id} textValue={member?.name}>
+                <div className="flex gap-2 items-center">
+                  <Avatar alt={member?.name} className="flex-shrink-0" size="sm" src={member?.avatar} />
+                  <div className="flex flex-col">
+                    <span className="text-small">{member?.name}</span>
+                  </div>
+                </div>
+              </SelectItem>
+            )}
+          </Select>
+          <Button
+            className="max-w-[6rem] my-4"
+            aria-label="adjust scale"
+            color="primary"
+            variant="bordered"
+            onClick={handleClickMemberScale}
+          >
+            調整比例
+          </Button>
+        </CardBody>
+      </Card>
+      <div className="flex flex-row mt-4">
+        <Button
+          className="max-w-[6rem] basis-1/2 sm:ml-4"
+          aria-label="cancel"
+          color="primary"
+          variant="faded"
+          onClick={handleClickCancel}
+        >
+          取消
+        </Button>
+        <Button
+          className="max-w-[6rem] basis-1/2 ml-auto sm:mr-4"
+          aria-label="new"
+          color="primary"
+          variant="bordered"
+          onClick={handleClickAdd}
+        >
+          新增
+        </Button>
+      </div>
     </div>
   );
 };

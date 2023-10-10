@@ -25,7 +25,7 @@ const MembersPage = () => {
   return (
     <div>
       {members && <MemberList members={members} tableColumns={projectMemberListColumns} />}
-      <AddButton onClick={handleClickAddButton} />
+      <AddButton className="absolute right-4 bottom-4" onClick={handleClickAddButton} />
     </div>
   );
 };
