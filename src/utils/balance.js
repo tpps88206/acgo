@@ -67,3 +67,17 @@ export const getBalanceResult = (events, members) => {
     return [];
   }
 };
+
+export const getBalancesProgressBar = balanceResult => {
+  let total = 0;
+
+  if (isArray(balanceResult) && balanceResult.length > 0) {
+    balanceResult.forEach(item => {
+      if (item.needToPay > 0) {
+        total = total + item.needToPay;
+      }
+    });
+  }
+
+  return total;
+};

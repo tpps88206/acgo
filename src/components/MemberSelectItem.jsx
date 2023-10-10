@@ -14,7 +14,7 @@ const MemberSelectItem = ({ member, columnKey, setValue }) => {
       case 'name':
         return (
           <User aria-label="name" avatarProps={{ radius: 'lg', src: member?.avatar }} name={cellValue}>
-            {member?.email}
+            {member?.name}
           </User>
         );
       case 'role':
