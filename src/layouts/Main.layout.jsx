@@ -8,6 +8,7 @@ const MainLayout = () => {
     <div>
       <Header />
       <Outlet />
+      <div className="h-4" />
     </div>
   );
 };

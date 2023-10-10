@@ -8,17 +8,15 @@ import AddIcon from '../icons/Add.icon.jsx';
 
 const AddButton = ({ className, ...props }) => {
   return (
-    <div className="flex gap-4 items-center">
-      <Button
-        className={classNames('w-20 h-20 rounded-full', className)}
-        isIconOnly
-        color="primary"
-        variant="shadow"
-        {...props}
-      >
-        <AddIcon />
-      </Button>
-    </div>
+    <Button
+      className={classNames('w-20 h-20 rounded-full', className)}
+      isIconOnly
+      color="primary"
+      variant="shadow"
+      {...props}
+    >
+      <AddIcon />
+    </Button>
   );
 };
 

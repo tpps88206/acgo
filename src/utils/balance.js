@@ -1,3 +1,4 @@
+import clone from 'lodash/clone';
 import isArray from 'lodash/isArray';
 import isString from 'lodash/isString';
 
@@ -68,7 +69,7 @@ export const getBalanceResult = (events, members) => {
   }
 };
 
-export const getBalancesProgressBar = balanceResult => {
+export const getBalancesTotal = balanceResult => {
   let total = 0;
 
   if (isArray(balanceResult) && balanceResult.length > 0) {
@@ -80,4 +81,68 @@ export const getBalancesProgressBar = balanceResult => {
   }
 
   return total;
+};
+
+export const getBalancesCheckout = balanceResult => {
+  const result = [];
+
+  if (isArray(balanceResult) && balanceResult.length > 0) {
+    // 先把要收錢和付錢的人分兩組
+    const needReceivedList = [];
+    const needPaidList = [];
+
+    balanceResult.forEach(item => {
+      if (item.needToPay > 0) {
+        needReceivedList.push(clone(item));
+      } else {
+        needPaidList.push(clone(item));
+      }
+    });
+
+    needReceivedList.forEach(owes => {
+      needPaidList.some(paid => {
+        if (paid.needToPay < 0) {
+          if (owes.needToPay + paid.needToPay >= 0) {
+            // 付錢的人需要付的錢少於收錢人
+            result.push({
+              memberID: paid.memberID,
+              name: paid.name,
+              owesMemberID: owes.memberID,
+              owesName: owes.name,
+              cost: paid.needToPay * -1,
+            });
+
+            // 收錢的人扣掉已經被付掉的錢
+            owes.needToPay = owes.needToPay + paid.needToPay;
+
+            // 因為付完錢了，把金額改成 0
+            paid.needToPay = 0;
+
+            return false;
+          } else {
+            // 付錢的人需要付的錢多於收錢人
+            result.push({
+              memberID: paid.memberID,
+              name: paid.name,
+              owesMemberID: owes.memberID,
+              owesName: owes.name,
+              cost: owes.needToPay,
+            });
+
+            // 付錢的人扣掉已經付掉的錢
+            paid.needToPay = owes.needToPay + paid.needToPay;
+
+            // 因為收完錢了，把金額改成 0
+            owes.needToPay = 0;
+
+            return true;
+          }
+        }
+      });
+    });
+
+    return result;
+  } else {
+    return [];
+  }
 };

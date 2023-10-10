@@ -4,15 +4,17 @@ import { useParams } from 'react-router-dom';
 import { Card, CardBody } from '@nextui-org/react';
 
 import BalanceList from '../components/BalanceList.jsx';
+import CheckoutList from '../components/CheckoutList.jsx';
 import { getEvents } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
-import { getBalanceResult, getBalancesProgressBar } from '../utils/balance.js';
+import { getBalanceResult, getBalancesCheckout, getBalancesTotal } from '../utils/balance.js';
 
 const BalancePage = () => {
   const { projectID } = useParams();
   const [events, setEvents] = useState([]);
   const [members, setMembers] = useState([]);
   const [balances, setBalances] = useState([]);
+  const [checkoutResult, setCheckoutResult] = useState([]);
   const [isLoadedEvents, setIsLoadedEvents] = useState(false);
   const [isLoadedMembers, setIsLoadedMembers] = useState(false);
   const [balanceTotalCost, setBalanceTotalCost] = useState(0);
@@ -37,8 +39,11 @@ const BalancePage = () => {
   }, [events, members, isLoadedEvents, isLoadedMembers]);
 
   useEffect(() => {
-    const total = getBalancesProgressBar(balances);
+    const total = getBalancesTotal(balances);
+    const checkout = getBalancesCheckout(balances);
+
     setBalanceTotalCost(total);
+    setCheckoutResult(checkout);
   }, [balances]);
 
   return (
@@ -47,6 +52,13 @@ const BalancePage = () => {
         <Card className="container mx-auto px-4">
           <CardBody>
             <BalanceList balances={balances} total={balanceTotalCost} />
+          </CardBody>
+        </Card>
+      )}
+      {checkoutResult && (
+        <Card className="container mx-auto px-4 mt-4">
+          <CardBody>
+            <CheckoutList checkoutResult={checkoutResult} />
           </CardBody>
         </Card>
       )}
