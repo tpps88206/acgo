@@ -167,8 +167,7 @@ const AddEventPage = ({ mode }) => {
           <Button
             className="max-w-[6rem] my-4"
             aria-label="adjust scale"
-            color="primary"
-            variant="bordered"
+            color="secondary"
             onClick={handleClickMemberScale}
           >
             調整比例
@@ -179,8 +178,7 @@ const AddEventPage = ({ mode }) => {
         <Button
           className="max-w-[6rem] basis-1/2 sm:ml-4"
           aria-label="cancel"
-          color="primary"
-          variant="faded"
+          color="danger"
           onClick={handleClickCancel}
         >
           取消
@@ -189,7 +187,6 @@ const AddEventPage = ({ mode }) => {
           className="max-w-[6rem] basis-1/2 ml-auto sm:mr-4"
           aria-label="new"
           color="primary"
-          variant="bordered"
           onClick={handleClickAdd}
         >
           新增

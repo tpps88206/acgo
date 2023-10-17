@@ -70,8 +70,7 @@ const AddMemberPage = () => {
         <Button
           className="max-w-[6rem] basis-1/2 sm:ml-4"
           aria-label="cancel"
-          color="primary"
-          variant="faded"
+          color="danger"
           onClick={handleClickCancel}
         >
           取消
@@ -80,7 +79,6 @@ const AddMemberPage = () => {
           className="max-w-[6rem] basis-1/2 ml-auto sm:mr-4"
           aria-label="new"
           color="primary"
-          variant="bordered"
           onClick={handleClickAdd}
         >
           新增

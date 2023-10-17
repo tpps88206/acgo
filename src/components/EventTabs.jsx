@@ -30,14 +30,14 @@ const EventTabs = ({ mode, className }) => {
   return (
     <div className={classNames('flex w-full flex-col', className)}>
       <ButtonGroup>
-        <Button variant={mode === 'expense' ? 'bordered' : 'solid'} color="primary" onClick={handleClickExpenseButton}>
+        <Button variant={mode === 'expense' ? 'solid' : 'bordered'} color="primary" onClick={handleClickExpenseButton}>
           花費
         </Button>
-        <Button variant={mode === 'income' ? 'bordered' : 'solid'} color="primary" onClick={handleClickIncomeButton}>
+        <Button variant={mode === 'income' ? 'solid' : 'bordered'} color="primary" onClick={handleClickIncomeButton}>
           收入
         </Button>
         <Button
-          variant={mode === 'transfer' ? 'bordered' : 'solid'}
+          variant={mode === 'transfer' ? 'solid' : 'bordered'}
           color="primary"
           onClick={handleClickTransferButton}
         >
