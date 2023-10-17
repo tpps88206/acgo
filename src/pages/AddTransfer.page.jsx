@@ -11,7 +11,7 @@ import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js'
 const AddTransferPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState(null);
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
   const [shareForWhom, setShareForWhom] = useState([]);

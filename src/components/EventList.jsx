@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Divider } from '@nextui-org/react';
 
@@ -12,16 +12,15 @@ const EventList = ({ events, members }) => {
         const paidByName = members.find(member => member.id === event?.paidBy);
 
         return (
-          <>
+          <Fragment key={index}>
             {index > 0 && <Divider className="my-4" />}
             <EventListItem
-              key={event?.id}
               title={event?.title}
               cost={event?.cost}
               paidBy={paidByName?.name}
               createdAt={convertTimestamp(event?.createdAt)}
             />
-          </>
+          </Fragment>
         );
       })}
     </div>

@@ -6,7 +6,7 @@ import { memberRoleColorMap } from '../constants/members.js';
 import { DeleteIcon } from '../icons/Delete.icon.jsx';
 import { EditIcon } from '../icons/Edit.icon.jsx';
 
-const MemberSelectItem = ({ member, columnKey, setValue }) => {
+const MemberListItem = ({ member, columnKey, setValue }) => {
   const renderCell = () => {
     const cellValue = member[columnKey];
 
@@ -56,4 +56,4 @@ const MemberSelectItem = ({ member, columnKey, setValue }) => {
   return <div>{renderCell()}</div>;
 };
 
-export default MemberSelectItem;
+export default MemberListItem;

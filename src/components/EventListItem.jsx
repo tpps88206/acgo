@@ -7,12 +7,12 @@ const EventListItem = ({ title, cost, paidBy, createdAt }) => {
     <div className="flex flex-row">
       <div className="basis-1/2 flex flex-col">
         <p className="text-xl mb-4">{title}</p>
-        <p>
+        <span>
           {paidBy}{' '}
           <Chip color={cost >= 0 ? 'success' : 'danger'} variant="bordered">
             {cost >= 0 ? '先收' : '先付'}
           </Chip>
-        </p>
+        </span>
       </div>
       <div className="basis-1/2 flex flex-col">
         <p className="text-xl mb-4">{cost >= 0 ? cost : cost * -1}</p>

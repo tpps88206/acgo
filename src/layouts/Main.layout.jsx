@@ -5,10 +5,11 @@ import Header from '../components/Header.jsx';
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="mb-4">
       <Header />
-      <Outlet />
-      <div className="h-4" />
+      <div className="mx-4">
+        <Outlet />
+      </div>
     </div>
   );
 };

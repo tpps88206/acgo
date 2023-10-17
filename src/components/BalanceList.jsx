@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { Divider } from '@nextui-org/react';
 
@@ -9,7 +9,7 @@ const BalanceList = ({ balances, total }) => {
     <div>
       {balances.map((balance, index) => {
         return (
-          <>
+          <Fragment key={index}>
             {index > 0 && <Divider className="my-4" />}
             <BalanceListItem
               key={balance?.memberID}
@@ -17,7 +17,7 @@ const BalanceList = ({ balances, total }) => {
               needToPay={balance?.needToPay}
               total={total}
             />
-          </>
+          </Fragment>
         );
       })}
     </div>

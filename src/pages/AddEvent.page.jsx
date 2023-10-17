@@ -13,7 +13,7 @@ const AddEventPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState(null);
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
   const [shareForWhom, setShareForWhom] = useState([]);
