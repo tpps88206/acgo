@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, Button, Card, CardBody, Input, Select, SelectItem } from '@nextui-org/react';
 
 import EventTabs from '../components/EventTabs.jsx';
+import { useModalDispatch } from '../context/Modal.context.jsx';
 import { addEvent } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
 import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js';
@@ -11,6 +12,7 @@ import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js'
 const AddTransferPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
+  const modalDispatch = useModalDispatch();
   const [cost, setCost] = useState('');
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
@@ -30,11 +32,15 @@ const AddTransferPage = ({ mode }) => {
   const handleClickAdd = () => {
     addEvent(projectID, '轉帳', mode === 'income' ? cost : cost * -1, paidBy, shareForWhom, mode)
       .then(() => {
+        modalDispatch({ type: 'openSuccessModal' });
+
         navigate(`/p/${projectID}`, {
           relative: 'path',
         });
       })
       .catch(error => {
+        modalDispatch({ type: 'openErrorModal' });
+
         console.error(error);
       });
   };

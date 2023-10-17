@@ -11,14 +11,14 @@ const Wrapper = styled.svg`
   stroke: white;
   stroke-miterlimit: 10;
   margin: 10% auto;
-  box-shadow: inset 0 0 0 #1bc964;
+  box-shadow: inset 0 0 0 #f31260;
   animation:
-    fillsuccess 0.4s ease-in-out 0.4s forwards,
+    fillerror 0.4s ease-in-out 0.4s forwards,
     scale 0.3s ease-in-out 0.9s both;
 
-  @keyframes fillsuccess {
+  @keyframes fillerror {
     100% {
-      box-shadow: inset 0 0 0 75px #1bc964;
+      box-shadow: inset 0 0 0 75px #f31260;
     }
   }
 `;
@@ -28,7 +28,7 @@ const WrapperCircle = styled.circle`
   stroke-dashoffset: 166;
   stroke-width: 5px;
   stroke-miterlimit: 10;
-  stroke: #1bc964;
+  stroke: #f31260;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 
   @keyframes stroke {
@@ -51,13 +51,13 @@ const WrapperPath = styled.path`
   }
 `;
 
-const SuccessAnimation = () => {
+const ErrorAnimation = () => {
   return (
     <Wrapper xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
       <WrapperCircle cx="26" cy="26" r="25" fill="none" />
-      <WrapperPath fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" strokeLinecap="round" />
+      <WrapperPath fill="none" d="M16 16 36 36 M36 16 16 36" strokeLinecap="round" />
     </Wrapper>
   );
 };
 
-export default SuccessAnimation;
+export default ErrorAnimation;

@@ -5,7 +5,7 @@ import { Avatar, Button, Card, CardBody, Chip, Input, Select, SelectItem } from 
 
 import AdjustMemberScale from '../components/AdjustMemberScale.jsx';
 import EventTabs from '../components/EventTabs.jsx';
-import SuccessfulModal from '../components/SuccessfulModal.jsx';
+import { useModalDispatch } from '../context/Modal.context.jsx';
 import { addEvent } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
 import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js';
@@ -13,13 +13,13 @@ import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js'
 const AddEventPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
+  const modalDispatch = useModalDispatch();
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
   const [shareForWhom, setShareForWhom] = useState([]);
   const [isAdjustMemberScale, setIsAdjustMemberScale] = useState(false);
-  const [isOpenSuccessfulModal, setIsOpenSuccessfulModal] = useState(false);
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
@@ -39,11 +39,15 @@ const AddEventPage = ({ mode }) => {
   const handleClickAdd = () => {
     addEvent(projectID, title, mode !== 'expense' ? cost : cost * -1, paidBy, shareForWhom, mode)
       .then(() => {
+        modalDispatch({ type: 'openSuccessModal' });
+
         navigate(`/p/${projectID}`, {
           relative: 'path',
         });
       })
       .catch(error => {
+        modalDispatch({ type: 'openErrorModal' });
+
         console.error(error);
       });
   };
@@ -194,7 +198,6 @@ const AddEventPage = ({ mode }) => {
           新增
         </Button>
       </div>
-      <SuccessfulModal isOpen={isOpenSuccessfulModal} onClose={() => setIsOpenSuccessfulModal(false)} />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { NextUIProvider } from '@nextui-org/react';
 
 import ErrorBoundary from './components/ErrorBoundary.jsx';
+import { ModalProvider } from './context/Modal.context.jsx';
 import Router from './routes/router.js';
 
 const App = () => {
@@ -11,7 +12,9 @@ const App = () => {
     <NextUIProvider>
       <BrowserRouter>
         <ErrorBoundary>
-          <Router />
+          <ModalProvider>
+            <Router />
+          </ModalProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </NextUIProvider>

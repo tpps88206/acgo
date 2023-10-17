@@ -4,11 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Card, CardBody, Input, Select, SelectItem } from '@nextui-org/react';
 
 import { memberRoleArray } from '../constants/members.js';
+import { useModalDispatch } from '../context/Modal.context.jsx';
 import { addMember } from '../services/firebase/member.js';
 
 const AddMemberPage = () => {
   const { projectID } = useParams();
   const navigate = useNavigate();
+  const modalDispatch = useModalDispatch();
   const [name, setName] = useState('');
   const [role, setRole] = useState('view');
 
@@ -23,11 +25,15 @@ const AddMemberPage = () => {
   const handleClickAdd = () => {
     addMember(projectID, name, role)
       .then(() => {
+        modalDispatch({ type: 'openSuccessModal' });
+
         navigate(`/p/${projectID}/members`, {
           relative: 'path',
         });
       })
       .catch(error => {
+        modalDispatch({ type: 'openErrorModal' });
+
         console.error(error);
       });
   };
