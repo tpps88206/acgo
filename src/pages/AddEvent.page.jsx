@@ -5,6 +5,7 @@ import { Avatar, Button, Card, CardBody, Chip, Input, Select, SelectItem } from 
 
 import AdjustMemberScale from '../components/AdjustMemberScale.jsx';
 import EventTabs from '../components/EventTabs.jsx';
+import SuccessfulModal from '../components/SuccessfulModal.jsx';
 import { addEvent } from '../services/firebase/event.js';
 import { getMembers } from '../services/firebase/member.js';
 import { flatMemberListToArrayWithIDAndHideScaleZero } from '../utils/member.js';
@@ -13,11 +14,12 @@ const AddEventPage = ({ mode }) => {
   const { projectID } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [cost, setCost] = useState(null);
+  const [cost, setCost] = useState('');
   const [members, setMembers] = useState([]);
   const [paidBy, setPaidBy] = useState('');
   const [shareForWhom, setShareForWhom] = useState([]);
   const [isAdjustMemberScale, setIsAdjustMemberScale] = useState(false);
+  const [isOpenSuccessfulModal, setIsOpenSuccessfulModal] = useState(false);
 
   useEffect(() => {
     // TODO: 判斷是否改用監聽事件來即時更新 https://firebase.google.com/docs/database/web/read-and-write?hl=zh&authuser=6#web_value_events
@@ -192,6 +194,7 @@ const AddEventPage = ({ mode }) => {
           新增
         </Button>
       </div>
+      <SuccessfulModal isOpen={isOpenSuccessfulModal} onClose={() => setIsOpenSuccessfulModal(false)} />
     </div>
   );
 };
