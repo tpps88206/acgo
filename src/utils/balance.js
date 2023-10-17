@@ -24,36 +24,36 @@ export const getBalanceResult = (events, members) => {
           event.shareForWhom.forEach(eachShare => {
             totalScale = totalScale + (Number(eachShare.scale) || 0);
           });
-        }
 
-        // 從 result 各別計算每個人需要分幾份
-        result = result.map(memberFromResult => {
-          let needToPayResult = memberFromResult.needToPay;
+          // 從 result 各別計算每個人需要分幾份
+          result = result.map(memberFromResult => {
+            let needToPayResult = memberFromResult.needToPay;
 
-          const shareForThisMember = event.shareForWhom.find(
-            eachShare =>
-              isString(eachShare.id) &&
+            const shareForThisMember = event.shareForWhom.find(
+              eachShare =>
+                isString(eachShare.id) &&
+                isString(memberFromResult.memberID) &&
+                eachShare.id === memberFromResult.memberID,
+            );
+
+            // 付錢或收錢的人要把錢加給他
+            if (
+              isString(event.paidBy) &&
               isString(memberFromResult.memberID) &&
-              eachShare.id === memberFromResult.memberID,
-          );
+              event.paidBy === memberFromResult.memberID
+            ) {
+              needToPayResult = needToPayResult + event.cost * -1;
+            }
 
-          // 付錢或收錢的人要把錢加給他
-          if (
-            isString(event.paidBy) &&
-            isString(memberFromResult.memberID) &&
-            event.paidBy === memberFromResult.memberID
-          ) {
-            needToPayResult = needToPayResult + event.cost * -1;
-          }
-
-          return {
-            memberID: memberFromResult.memberID,
-            name: memberFromResult.name,
-            needToPay:
-              // 如果這個人的 ID 有存在在這次的事件中，就要計算
-              shareForThisMember ? needToPayResult + (cost / totalScale) * shareForThisMember.scale : needToPayResult,
-          };
-        });
+            return {
+              memberID: memberFromResult.memberID,
+              name: memberFromResult.name,
+              needToPay:
+                // 如果這個人的 ID 有存在在這次的事件中，就要計算
+                shareForThisMember ? needToPayResult + (cost / totalScale) * shareForThisMember.scale : needToPayResult,
+            };
+          });
+        }
       });
 
       return result;
